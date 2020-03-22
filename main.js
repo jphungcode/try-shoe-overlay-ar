@@ -44,12 +44,19 @@ AFRAME.registerComponent("model", {
         currentModel = 2;
         $("#model-selector").attr("scale", "0.2 0.2 0.2");
 
-        // $("#model-selector").attr("gltf-model", `./assets/yeezy/yeezy350V4.glb`);
-        $("#model-selector").attr("gltf-model", `#model-${currentModel}`);
+        $("#model-selector").attr(
+          "gltf-model",
+          `./assets/yeezy/yeezy350V4.glb`
+        );
+        // $("#model-selector").attr("gltf-model", `#model-${currentModel}`);
       } else {
         currentModel--;
         $("#model-selector").attr("scale", "0.5 0.5 0.5");
-        $("#model-selector").attr("gltf-model", `#model-${currentModel}`);
+        $("#model-selector").attr(
+          "gltf-model",
+          `./assets/ultraboost/boot-processed.glb`
+        );
+        //$("#model-selector").attr("gltf-model", `#model-${currentModel}`);
       }
       document
         .querySelector(`#model-${currentModel}`)

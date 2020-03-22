@@ -43,7 +43,10 @@ AFRAME.registerComponent("model", {
       if (currentModel < 1) {
         currentModel = 2;
         $("#model-selector").attr("scale", "0.2 0.2 0.2");
-        $("#model-selector").attr("gltf-model", `#model-${currentModel}`);
+        $("#model-selector").attr(
+          "gltf-model",
+          `url(./assets/yeezy/yeezy350V4.glb)`
+        );
       } else {
         currentModel--;
         $("#model-selector").attr("scale", "0.5 0.5 0.5");

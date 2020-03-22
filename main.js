@@ -138,6 +138,76 @@ $(document).ready(function() {
     }
   });
 
+  $("#info_btn").click(function() {
+    document.querySelectorAll("a-asset-item").forEach(asset => {
+      if (asset.getAttribute("data-active") == "true") {
+        let finalIndex = 0;
+        let shoeType = asset.getAttribute("data-type");
+        let styleContainer = document.querySelector(
+          "#style_selection_container"
+        );
+        $("#style_selection_container").empty();
+        console.log(shoeType);
+        if (shoeType === "ultraboost") {
+          document
+            .querySelector(".shoe_overlay_image")
+            .setAttribute("src", `./assets/${shoeType}/top_view_4.png`);
+          // set img src for style selection
+          finalIndex = 5;
+        } else {
+          document
+            .querySelector(".shoe_overlay_image")
+            .setAttribute("src", `./assets/${shoeType}/style-1.png`);
+          finalIndex = 4;
+        }
+
+        let finalHTML = "";
+        for (i = 1; i < finalIndex; i++) {
+          let imageHTML = `<img id="style-${i}" src="./assets/${shoeType}/${shoeType}${i}_cropped.png "/>`;
+          finalHTML = finalHTML + imageHTML;
+        }
+        styleContainer.innerHTML = finalHTML;
+      }
+    });
+    $("#shoe_overlay").css("display", "block");
+    $("#back_btn").css("display", "block");
+    $("#help_text").css("display", "none");
+    $("#left_btn").css("display", "none");
+    $("#right_btn").css("display", "none");
+    $("#style_selection").css("display", "block");
+    $("#model-selector").attr("visible", "false");
+    modelActive = false;
+  });
+
+  $("#back_btn").click(function() {
+    $("#help_text").css("display", "block");
+    $("#back_btn").css("display", "none");
+    $("#shoe_overlay").css("display", "none");
+    $("#left_btn").css("display", "block");
+    $("#right_btn").css("display", "block");
+    $("#style_selection").css("display", "none");
+    $("#style_selection_container").css("display", "none");
+    $("#black_overlay").css("display", "none");
+    $("#model-selector").attr("visible", "true");
+    modelActive = true;
+  });
+
+  let style_selection_display = false;
+
+  $("#style_selection").click(function() {
+    if (!style_selection_display) {
+      $("#style_selection_container").css("display", "inline-block");
+      $("#black_overlay").css("display", "block");
+      $("#logo").css("display", "none");
+      style_selection_display = true;
+    } else {
+      $("#style_selection_container").css("display", "none");
+      $("#black_overlay").css("display", "none");
+      $("#logo").css("display", "block");
+      style_selection_display = false;
+    }
+  });
+
   document
     .getElementById("style_selection_container")
     .addEventListener("click", function(e) {
@@ -165,71 +235,3 @@ function closePopUp() {
   magnificPopup.close();
   // Close popup that is currently opened
 }
-
-$("#info_btn").click(function() {
-  console.log("click");
-  document.querySelectorAll("a-asset-item").forEach(asset => {
-    if (asset.getAttribute("data-active") == "true") {
-      let finalIndex = 0;
-      let shoeType = asset.getAttribute("data-type");
-      let styleContainer = document.querySelector("#style_selection_container");
-      $("#style_selection_container").empty();
-      if (shoeType == "ultraboost") {
-        document
-          .querySelector(".shoe_overlay_image")
-          .setAttribute("src", `./assets/${shoeType}/top_view_4.png`);
-        // set img src for style selection
-        finalIndex = 5;
-      } else {
-        document
-          .querySelector(".shoe_overlay_image")
-          .setAttribute("src", `./assets/${shoeType}/style-1.png`);
-        finalIndex = 4;
-      }
-
-      let finalHTML = "";
-      for (i = 1; i < finalIndex; i++) {
-        let imageHTML = `<img id="style-${i}" src="./assets/${shoeType}/${shoeType}${i}_cropped.png "/>`;
-        finalHTML = finalHTML + imageHTML;
-      }
-      styleContainer.innerHTML = finalHTML;
-    }
-  });
-  $("#shoe_overlay").css("display", "block");
-  $("#back_btn").css("display", "block");
-  $("#help_text").css("display", "none");
-  $("#left_btn").css("display", "none");
-  $("#right_btn").css("display", "none");
-  $("#style_selection").css("display", "block");
-  $("#model-selector").attr("visible", "false");
-  modelActive = false;
-});
-
-$("#back_btn").click(function() {
-  $("#help_text").css("display", "block");
-  $("#back_btn").css("display", "none");
-  $("#shoe_overlay").css("display", "none");
-  $("#left_btn").css("display", "block");
-  $("#right_btn").css("display", "block");
-  $("#style_selection").css("display", "none");
-  $("#style_selection_container").css("display", "none");
-  $("#black_overlay").css("display", "none");
-  $("#model-selector").attr("visible", "true");
-  modelActive = true;
-});
-
-let style_selection_display = false;
-
-$("#style_selection").click(function() {
-  if (!style_selection_display) {
-    $("#style_selection_container").css("display", "inline-block");
-    $("#black_overlay").css("display", "block");
-    $("#logo").css("display", "none");
-    style_selection_display = true;
-  } else {
-    $("#style_selection_container").css("display", "none");
-    $("#black_overlay").css("display", "none");
-    $("#logo").css("display", "block");
-    style_selection_display = false;
-  }
-});

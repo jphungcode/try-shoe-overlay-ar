@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--AR JS lib-->
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <!--Other LIB-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+    <!--Hand touch controls-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="./main.js"></script>
+  </head>
+  <body>
+    <img id="spinner" src="./assets/spinner.gif" />
+    <img id="logo" src="./assets/adidas_logo.png" />
+
+    <a-scene
+      loadscene
+      registerevents
+      embedded
+      arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3; patternRatio: 0.9"
+    >
+      <a-assets>
+        <a-asset-item
+          response-type="arraybuffer"
+          id="model-1"
+          src="./assets/ultraboost/boot-processed.glb"
+          data-active="true"
+          data-type="ultraboost"
+        ></a-asset-item>
+        <a-asset-item
+          response-type="arraybuffer"
+          id="model-2"
+          src="./assets/yeezy/yeezy350V4.glb"
+          data-active="false"
+          data-type="yeezy"
+        ></a-asset-item>
+        <!-- <a-asset-item
+          id="model-3"
+          src="../image/catalog/AR/jbhifi./assets/note9/out.glb"
+        ></a-asset-item>  -->
+      </a-assets>
+      <a-light color="#FFF" position="-2 2 0"></a-light>
+      <a-light color="#FFF" position="2 2 0"></a-light>
+      <a-light color="#FFF" position="-2 -2 0"></a-light>
+      <a-light color="#FFF" position="2 -2 0"></a-light>
+      <a-light color="#FFF" position="0 0 2"></a-light>
+      <a-light type="ambient" color="#FFF"></a-light>
+      <a-marker
+        model
+        type="pattern"
+        preset="custom"
+        id="marker-hiro"
+        url="./assets/marker.patt"
+        emitevents="true"
+        cursor="fuse: false; rayOrigin: mouse"
+      >
+        <a-entity id="model-container">
+          <a-entity rotation="0 0 -90">
+            <a-entity
+              id="model-selector"
+              gltf-model="#model-1"
+              scale="0.5 0.5 0.5"
+              position="0 0 0"
+              rotation="-90 0 0"
+              visible="true"
+            ></a-entity>
+          </a-entity>
+        </a-entity>
+      </a-marker>
+
+      <a-entity camera> </a-entity>
+    </a-scene>
+
+    <div id="toggleBtn">
+      <img id="left_btn" src="./assets/left_arrow.svg" />
+      <img id="right_btn" src="./assets/left_arrow.svg" />
+    </div>
+
+    <div id="help_text">
+      <a href="#first-popup" id="info_btn">Try Shoe</a>
+    </div>
+
+    <div id="style_selection">
+      <img style="height: 100%; width: 100%" src="./assets/palette.png" />
+    </div>
+
+    <div id="style_selection_container"></div>
+
+    <div id="back_btn">
+      <img style="height: 100%; width: 100%" src="./assets/back.svg" />
+    </div>
+
+    <div id="shoe_overlay">
+      <img
+        class="shoe_overlay_image"
+        src="./assets/ultraboost/top_view_4.png"
+      />
+    </div>
+
+    <input id="buzz_id" type="hidden" name="id" value="action_25762" />
+  </body>
+</html>

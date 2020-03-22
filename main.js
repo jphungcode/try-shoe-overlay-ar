@@ -39,7 +39,7 @@ AFRAME.registerComponent("model", {
       document
         .querySelector(`#model-${currentModel}`)
         .setAttribute("data-active", "false");
-      currentModel--;
+      currentModel = currentModel - 1;
       if (currentModel < 1) {
         currentModel = 2;
         $("#model-selector").attr("scale", "0.2 0.2 0.2");
@@ -50,7 +50,6 @@ AFRAME.registerComponent("model", {
         );
         // $("#model-selector").attr("gltf-model", `#model-${currentModel}`);
       } else {
-        currentModel--;
         $("#model-selector").attr("scale", "0.5 0.5 0.5");
         $("#model-selector").attr(
           "gltf-model",

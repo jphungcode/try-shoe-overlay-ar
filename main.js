@@ -148,17 +148,11 @@ $(document).ready(function() {
           if (shoeType == "ultraboost") {
             document
               .querySelector(".shoe_overlay_image")
-              .setAttribute(
-                "src",
-                `../image/catalog/AR/Adidas/${shoeType}/${imageSelected}.png`
-              );
+              .setAttribute("src", `./assets/${shoeType}/${imageSelected}.png`);
           } else {
             document
               .querySelector(".shoe_overlay_image")
-              .setAttribute(
-                "src",
-                `../image/catalog/AR/Adidas/${shoeType}/${imageSelected}.png`
-              );
+              .setAttribute("src", `./assets/${shoeType}/${imageSelected}.png`);
           }
         }
       });
@@ -173,6 +167,7 @@ function closePopUp() {
 }
 
 $("#info_btn").click(function() {
+  console.log("click");
   document.querySelectorAll("a-asset-item").forEach(asset => {
     if (asset.getAttribute("data-active") == "true") {
       let finalIndex = 0;
@@ -182,25 +177,19 @@ $("#info_btn").click(function() {
       if (shoeType == "ultraboost") {
         document
           .querySelector(".shoe_overlay_image")
-          .setAttribute(
-            "src",
-            `../image/catalog/AR/Adidas/${shoeType}/top_view_4.png`
-          );
+          .setAttribute("src", `./assets/${shoeType}/top_view_4.png`);
         // set img src for style selection
         finalIndex = 5;
       } else {
         document
           .querySelector(".shoe_overlay_image")
-          .setAttribute(
-            "src",
-            `../image/catalog/AR/Adidas/${shoeType}/style-1.png`
-          );
+          .setAttribute("src", `./assets/${shoeType}/style-1.png`);
         finalIndex = 4;
       }
 
       let finalHTML = "";
       for (i = 1; i < finalIndex; i++) {
-        let imageHTML = `<img id="style-${i}" src="../image/catalog/AR/Adidas/${shoeType}/${shoeType}${i}_cropped.png "/>`;
+        let imageHTML = `<img id="style-${i}" src="./assets/${shoeType}/${shoeType}${i}_cropped.png "/>`;
         finalHTML = finalHTML + imageHTML;
       }
       styleContainer.innerHTML = finalHTML;
